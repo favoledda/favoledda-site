@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FAVOLEDDA Kids Party Animation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#fffaf4;
+      --text:#2e2a3b;
+      --muted:#6f667f;
+      --pink:#f5a9c7;
+      --pink-2:#ffe1ec;
+      --purple:#b79cf4;
+      --blue:#9cccf5;
+      --yellow:#ffd86b;
+      --green:#b7e7c2;
+      --card:#ffffff;
+      --shadow:0 18px 50px rgba(69, 41, 99, .12);
+      --radius:28px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:'Nunito',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(247,179,208,.22), transparent 24%),
+        radial-gradient(circle at top right, rgba(165,209,246,.22), transparent 22%),
+        linear-gradient(180deg, #fffaf4 0%, #fffdf9 100%);
+    }
+    a{color:inherit;text-decoration:none}
+    .wrap{width:min(1120px, calc(100% - 32px)); margin:0 auto}
+    .topbar{
+      position:sticky; top:0; z-index:20;
+      backdrop-filter: blur(12px);
+      background:rgba(255,250,244,.75);
+      border-bottom:1px solid rgba(120,90,140,.08);
+    }
+    .nav{display:flex; align-items:center; justify-content:space-between; padding:14px 0; gap:16px}
+    .brand{display:flex; align-items:center; gap:12px; font-family:'Baloo 2', cursive; font-weight:800}
+    .logo{
+      width:46px;height:46px;border-radius:16px;
+      background:linear-gradient(135deg, var(--pink), var(--purple));
+      box-shadow:0 10px 20px rgba(183,156,244,.28);
+      position:relative; flex:0 0 auto;
+    }
+    .logo-img{
+      width:clamp(48px,5.5vw,88px);
+      aspect-ratio:1 / 1;
+      height:auto;
+      border-radius:14px; object-fit:cover; flex:0 0 auto;
+      box-shadow:0 10px 20px rgba(183,156,244,.28);
+    }
+    .logo:before,.logo:after{content:''; position:absolute; border-radius:999px; background:#fff}
+    .logo:before{width:10px;height:10px; left:10px; top:13px; box-shadow:16px 0 0 #fff}
+    .logo:after{width:18px;height:6px; left:14px; bottom:11px}
+    .navlinks{display:flex; gap:18px; flex-wrap:wrap; justify-content:flex-end}
+    .navlinks a{font-weight:800; color:var(--muted)}
+    .navlinks a:hover{color:var(--text)}
+
+    .hero{padding:34px 0 18px; min-height:calc(100vh - 84px); display:flex; align-items:center}
+    .hero-grid{
+      display:grid; grid-template-columns:1.15fr .85fr; gap:26px; align-items:stretch; height:100%;
+    }
+    .hero-copy{
+      padding:34px; border-radius:36px; background:rgba(255,255,255,.78);
+      box-shadow:var(--shadow); border:1px solid rgba(120,90,140,.08);
+      position:relative; overflow:hidden;
+      height:100%; display:flex; flex-direction:column; justify-content:center;
+    }
+    .hero-copy:before{
+      content:''; position:absolute; inset:auto -60px -80px auto; width:220px; height:220px;
+      background:radial-gradient(circle, rgba(247,179,208,.35), transparent 62%);
+      pointer-events:none;
+    }
+    .badge{
+      display:inline-flex; gap:8px; align-items:center;
+      background:linear-gradient(90deg, var(--pink-2), #f6edff);
+      border:1px solid rgba(120,90,140,.08);
+      padding:9px 14px; border-radius:999px; font-weight:800; color:#7b4d6d;
+    }
+    h1{
+      font-family:'Baloo 2', cursive; margin:16px 0 10px; line-height:0.95;
+      font-size:clamp(2.7rem, 6vw, 5rem);
+      letter-spacing:.2px;
+    }
+    .lead{font-size:1.08rem; line-height:1.7; color:var(--muted); max-width:58ch}
+    .cta-row{display:flex; gap:14px; flex-wrap:wrap; margin-top:22px}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:14px 18px; border-radius:16px; font-weight:900; border:0;
+      box-shadow:0 10px 20px rgba(0,0,0,.08); transition:.2s transform, .2s box-shadow;
+    }
+    .btn:hover{transform:translateY(-2px)}
+    .btn.primary{background:linear-gradient(135deg, var(--purple), var(--pink)); color:#fff}
+    .btn.secondary{background:#fff; color:#5f4b7a; border:1px solid rgba(120,90,140,.12)}
+    .service-btn{
+      background:#9c7ce5;
+      color:#fff;
+      border:1px solid #8b6bd8;
+      box-shadow:0 10px 22px rgba(124, 98, 215, .22);
+    }
+    .service-btn:hover,
+    .service-btn:focus-visible,
+    .service-btn:active{
+      background:#7b5fd6;
+      transform:translateY(-2px);
+      box-shadow:0 12px 24px rgba(123, 95, 214, .28);
+    }
+    .btn-content{display:inline-flex; align-items:center; justify-content:center; gap:10px}
+    .social-icon{width:20px; height:20px; display:inline-flex; align-items:center; justify-content:center; flex:0 0 auto}
+    .social-icon svg{width:100%; height:100%; fill:currentColor}
+
+    .hero-art{
+      background:linear-gradient(180deg, rgba(255,255,255,.9), rgba(255,255,255,.75));
+      border-radius:36px; box-shadow:var(--shadow); padding:24px; border:1px solid rgba(120,90,140,.08);
+    }
+    .hero-image{width:100%; height:100%; display:block; border-radius:20px; object-fit:cover}
+    .art-card{
+      border-radius:28px; min-height:440px; position:relative; overflow:hidden; height:100%; display:flex; align-items:center; justify-content:center;
+      background:
+        radial-gradient(circle at 50% 8%, rgba(255,216,107,.50), transparent 18%),
+        linear-gradient(180deg, #fef6ff 0%, #eef8ff 100%);
+    }
+    .rainbow{
+      position:absolute; inset:16px 16px auto; height:180px; border-radius:999px 999px 24px 24px;
+      background:conic-gradient(from 180deg, #ffb7d4, #ffe08a, #bce7b8, #b8d8ff, #d6bcff, #ffb7d4);
+      filter:saturate(1.05); opacity:.8; transform:translateY(-28px);
+      -webkit-mask: radial-gradient(circle at center bottom, transparent 0 34%, #000 35% 100%);
+              mask: radial-gradient(circle at center bottom, transparent 0 34%, #000 35% 100%);
+    }
+    .castle{position:absolute; left:50%; top:108px; transform:translateX(-50%); width:230px; height:170px}
+    .tower,.center{
+      position:absolute; bottom:0; background:#fff; border:4px solid rgba(126,114,160,.2); border-bottom-width:5px;
+      box-shadow:0 10px 20px rgba(97,74,122,.08)
+    }
+    .tower{width:58px; height:118px; border-radius:18px 18px 16px 16px}
+    .tower.left{left:6px}.tower.right{right:6px}
+    .center{left:67px; width:96px; height:132px; border-radius:20px 20px 18px 18px}
+    .roof{
+      position:absolute; left:50%; transform:translateX(-50%); top:-34px; width:0; height:0;
+      border-left:28px solid transparent; border-right:28px solid transparent; border-bottom:34px solid #d8bbff;
+      filter:drop-shadow(0 4px 0 rgba(126,114,160,.15))
+    }
+    .roof:after{
+      content:''; position:absolute; left:-18px; top:30px; width:6px; height:18px; background:#fff; border-radius:999px;
+      box-shadow:10px -6px 0 rgba(255,255,255,.7), -10px -4px 0 rgba(255,255,255,.7)
+    }
+    .window{position:absolute; width:14px; height:14px; background:#9cccf5; border-radius:50%}
+    .window.w1{left:22px; top:44px}.window.w2{left:112px; top:52px}.window.w3{right:16px; top:46px}
+    .doors{position:absolute; left:50%; bottom:0; transform:translateX(-50%); width:42px; height:62px; border-radius:22px 22px 0 0; background:#f4d7b8; border:4px solid rgba(126,114,160,.15); border-bottom:0}
+    .people{position:absolute; left:0; right:0; bottom:22px; display:flex; justify-content:space-evenly; align-items:flex-end}
+    .kid{text-align:center}
+    .head{width:42px;height:42px;border-radius:50%; background:#ffd9c8; margin:0 auto 6px; box-shadow:inset 0 -4px 0 rgba(0,0,0,.05)}
+    .hair1,.hair2,.hair3{position:relative}
+    .hair1:before,.hair2:before,.hair3:before{content:''; position:absolute; inset:-4px -4px auto -4px; height:24px; border-radius:50% 50% 38% 38%; background:#6a4637}
+    .hair2:before{background:#2f2b36}
+    .hair3:before{background:#d7b15b}
+    .body{width:42px;height:62px;border-radius:18px 18px 12px 12px; margin:0 auto; background:#a9d7a7}
+    .body.b2{background:#87c4ff}.body.b3{background:#c3a3ff}
+    .balloon{
+      position:absolute; width:42px; height:54px; border-radius:50% 50% 48% 48%; box-shadow:inset -8px -10px 0 rgba(255,255,255,.18);
+    }
+    .balloon:after{content:''; position:absolute; left:50%; top:52px; width:2px; height:42px; background:rgba(115,95,140,.45)}
+    .b1{left:24px; top:82px; background:#f7a9c8}.b2b{right:26px; top:78px; background:#f7c36b}.b3b{left:52%; top:56px; transform:translateX(-50%); background:#9cccf5}
+
+    .section{padding:18px 0 36px}
+    .section-title{font-family:'Baloo 2', cursive; font-size:clamp(2rem, 4vw, 3rem); margin:0 0 12px}
+    .section-sub{color:var(--muted); margin:0 0 22px; line-height:1.7}
+    .grid-3{display:grid; grid-template-columns:repeat(3, 1fr); gap:18px}
+    .card{
+      background:rgba(255,255,255,.9); border:1px solid rgba(120,90,140,.08); border-radius:28px; padding:24px; box-shadow:var(--shadow)
+    }
+    .pkg{min-height:240px; position:relative; overflow:hidden}
+    .pkg:before{content:''; position:absolute; inset:auto -40px -42px auto; width:160px; height:160px; border-radius:50%; background:rgba(247,179,208,.12)}
+    .pkg h3{font-family:'Baloo 2', cursive; font-size:1.7rem; margin:2px 0 10px}
+    ul{padding-left:18px; margin:0; color:var(--muted); line-height:1.8}
+    li{margin:2px 0}
+    .tag{display:inline-block; padding:7px 11px; border-radius:999px; font-weight:900; margin-bottom:10px}
+    .tag.p1{background:var(--pink-2); color:#b04e77}.tag.p2{background:#efe6ff; color:#7d56b8}.tag.p3{background:#e3f6eb; color:#21805b}
+
+    .highlight{
+      display:grid; grid-template-columns:1fr 1fr; gap:18px; align-items:center;
+      background:linear-gradient(135deg, rgba(255,216,107,.18), rgba(183,156,244,.14));
+      border-radius:32px; padding:28px; border:1px solid rgba(120,90,140,.08); box-shadow:var(--shadow)
+    }
+    .highlight-box{
+      background:#fff; border-radius:24px; padding:18px; box-shadow:0 10px 26px rgba(69,41,99,.08)
+    }
+    .mini{font-weight:900; color:#7b4d6d; margin:0 0 8px}
+    .contact{
+      display:grid; grid-template-columns:1.1fr .9fr; gap:18px; align-items:stretch
+    }
+    .contact-list{display:grid; gap:12px; margin-top:12px}
+    .contact-item{
+      display:flex; gap:12px; align-items:flex-start; background:#fff; border-radius:20px; padding:16px; border:1px solid rgba(120,90,140,.08)
+    }
+    .icon{width:40px;height:40px;border-radius:14px; display:grid; place-items:center; background:linear-gradient(135deg, var(--pink-2), #efe6ff); flex:0 0 auto}
+    .footer{padding:14px 0 28px; color:var(--muted); text-align:center}
+    .footer strong{color:var(--text)}
+
+    @media (max-width: 920px){
+      .hero-grid,.grid-3,.highlight,.contact{grid-template-columns:1fr}
+      .nav{flex-direction:column; align-items:flex-start}
+      .navlinks{justify-content:flex-start}
+      .hero-copy{padding:24px}
+      .art-card{min-height:400px}
+    }
+    @media (max-width: 560px){
+      .wrap{width:min(100% - 22px, 1120px)}
+      .hero-copy,.card,.highlight{padding:18px}
+      .cta-row{flex-direction:column}
+      .btn{width:100%}
+      .navlinks{gap:10px}
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap nav">
+      <div class="brand"><img src="logo_favoledda.jpeg" alt="FAVOLEDDA" class="logo-img"><div>FAVOLEDDA</div></div>
+      <nav class="navlinks">
+        <a href="#chi-siamo">Chi siamo</a>
+        <a href="#pacchetti">Pacchetti</a>
+        <a href="#extra">Extra</a>
+        <a href="#contatti">Contatti</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <div class="badge">Kids Party Animation · feste bambini</div>
+          <h1>FAVOLEDDA</h1>
+          <p class="lead">Animazione per feste di compleanno, giochi di gruppo e trucca bimbi. Portiamo magia, colore ed energia per rendere ogni evento davvero speciale, direttamente alla tua festa.</p>
+          <div class="cta-row">
+            <a class="btn primary" href="#contatti">Prenota ora</a>
+            <a class="btn secondary" href="#pacchetti">Vedi i pacchetti</a>
+          </div>
+        </div>
+
+        <div class="hero-art" aria-label="Illustrazione decorativa">
+          <div class="art-card">
+            <img src="hero.png" alt="Illustrazione Favoledda" class="hero-image" onerror="this.onerror=null;this.src='logo_favoledda.jpeg'">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="chi-siamo">
+      <div class="wrap">
+        <h2 class="section-title">Chi siamo</h2>
+        <p class="section-sub">Siamo Favoledda-Kids Party Animation, animazione per bambini nata ad Acireale con un sogno semplice:far ridere i bambini e far rilassare i genitori. Sono Paola, animatrice, e con il mio team porto feste piene di colori, giochi, truccabimbi e baby dance direttamente a casa tua, in villa o in sala, in tutta Acireale e provincia. Niete feste uguali, ogni bambino è unico e la sua festa deve esserlo. Tu goditi il momento, al divertimento ci pensiamo noi!</p>
+      </div>
+    </section>
+
+    <section class="section" id="pacchetti">
+      <div class="wrap">
+        <h2 class="section-title">I nostri pacchetti</h2>
+        <p class="section-sub">Tre formule semplici, da scegliere in base al tipo di festa e al livello di animazione che desideri.</p>
+        <div class="grid-3">
+          <article class="card pkg">
+            <span class="tag p1">Scintilla</span>
+            <h3>Giocoso e leggero</h3>
+            <p>Pensi che con poche ore non si possa fare una festa indimenticabile? Ti sorprenderemo. Scintilla è il nostro pacchetto base ma già completo di tutto il cuore Favoledda. Ideale per bimbi fino a 7 anni, per feste in casa o in spazi piccoli ad Acireale, per chi vuole tanta animazione di qualità senza esagerare.</p>
+            <p><strong>Cosa include:</strong></p>
+            <ul>
+              <li>Animazione coinvolgente e giochi di gruppo per rompere il ghiaccio subito</li>
+              <li>Musica e baby dance che fanno ballare anche i genitori</li>
+              <li>Palloncini colorati e gadget per tutti i bambini, così nessuno resta senza sorriso</li>
+              <li>Gestione del momento torta e auguri</li>
+            </ul>
+            <p><strong>Per chi è:</strong> Per le mamme che vogliono una festa semplice, allegra e super organizzata, senza stress. Tu apparecchi, noi facciamo ridere tutti.</p>
+            <p><strong>Prezzo:</strong> partenza su richiesta - Scrivici su WhatsApp</p>
+          </article>
+          <article class="card pkg">
+            <span class="tag p2">Favoledda</span>
+            <h3>Più creativo</h3>
+            <p>La nostra favola più amata - 9 feste su 10 ad Acireale scelgono questo. Questo è il pacchetto che ha fatto innamorare Acireale. È quello che fa dire alle mamme "Paola, quest'anno voglio lo stesso dell'anno scorso!" Più tempo, più magia, più ricordi. Con il truccabimbi artistico e i palloncini modellabili che i bambini portano a casa come trofeo.</p>
+            <p><strong>Cosa include (tutto Scintilla + in più):</strong></p>
+            <ul>
+              <li>Truccabimbi creativo con glitter atossici e disegni a tema (principesse, supereroi, animali)</li>
+              <li>Palloncini modellabili: spade, cagnolini, fiori, coroncine fatti al momento</li>
+              <li>Giochi di gruppo, bolle di sapone giganti e baby dance a tema</li>
+              <li>Piccolo laboratorio creativo a seconda dell'età</li>
+              <li>Gadget + gestione completa della festa dall'inizio alla torta</li>
+            </ul>
+            <p><strong>Per chi è:</strong> Per chi vuole la festa "WOW che bella!" che tutti i compagni ricorderanno a scuola il lunedì. Il giusto equilibrio tra prezzo e magia assoluta. <br></p>
+          </article>
+          <article class="card pkg">
+            <span class="tag p3">Deluxe</span>
+            <h3>Completo e speciale</h3>
+            <p>L'esperienza Deluxe - Quando vuoi che tuo figlio si senta davvero speciale. Non è una semplice animazione. È il suo giorno da protagonista. È per i genitori che vogliono esagerare... di felicità. Deluxe è il nostro pacchetto premium con 2 animatori, scenografia curata e il nostro spettacolo di magia comica che lascia tutti a bocca aperta, grandi compresi.</p>
+            <p><strong>Cosa include (tutto Favoledda + in più):</strong></p>
+            <ul>
+              <li>2 animatori professionisti per tutta la durata</li>
+              <li>Spettacolo di magia comica interattivo + baby dance coreografata</li>
+              <li>Animazione completa no-stop e decorazioni a tema base per la zona festa</li>
+              <li>Sculture di palloncini personalizzate per tutti</li>
+              <li>Set fotografico con accessori divertenti e ricordo fotografico per il festeggiato</li>
+              <li>Coordinamento totale: non pensi a nulla, goditi solo gli applausi</li>
+            </ul>
+            <p><strong>Per chi è:</strong> Per battesimi, feste grandi in villa, lidi o sale a Acireale, Aci Castello, Giarre, per chi vuole una festa che sembra uscita da Pinterest ma con l'allegria vera dei bambini.</p>
+            <p><em>Posti limitati al weekend, prenota con anticipo.</em></p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="extra">
+      <div class="wrap highlight">
+        <div>
+          <h2 class="section-title" style="margin-bottom:8px;">Extra magico a sorpresa</h2>
+          <p class="section-sub" style="margin-bottom:0;">Mascotte a sorpresa per il gran finale: 20 minuti con la mascotte preferita del tuo bambino. Un momento speciale da ricordare.</p>
+          <p><strong>Nota Mascotte: La mascotte è inclusa solo nel Pacchetto Deluxe. Per i Pacchetti Scintilla e Favoledda è disponibile su richiesta con un piccolo supplemento.</strong></p>
+        </div>
+        <div class="highlight-box">
+          <p class="mini">Perfetto per:</p>
+          <p style="margin:0;color:var(--muted);line-height:1.7;">compleanni, feste a tema, eventi in famiglia e piccoli party privati dove vuoi aggiungere un effetto wow.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contatti">
+      <div class="wrap contact">
+        <div class="card">
+          <h2 class="section-title" style="margin-bottom:8px;">Contatti & info</h2>
+          <p class="section-sub" style="margin-bottom:0;">Per disponibilità, preventivi e domande rapide puoi usare uno dei contatti qui sotto.</p>
+          <div class="contact-list">
+            <div class="contact-item"><div class="icon">📞</div><div><strong>Telefono</strong><br>345 666 5905</div></div>
+            <div class="contact-item"><div class="icon">✉️</div><div><strong>Email</strong><br>favoledda.animazione@gmail.com</div></div>
+          </div>
+        </div>
+        <div class="card" style="display:grid; align-content:start; gap:16px;">
+          <div>
+            <h3 class="section-title" style="font-size:1.9rem;margin-bottom:8px;">Zona di servizio</h3>
+            <p class="section-sub" style="margin-bottom:0;">Location Acireale e provincia.</p>
+          </div>
+          <a class="btn service-btn" href="tel:3456665905"><span class="btn-content"><span class="social-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6.6 10.3a15.4 15.4 0 0 0 7.1 7.1l2.4-2.4a1 1 0 0 1 1-.2 10.8 10.8 0 0 0 3.4.5 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.7a1 1 0 0 1 1 1 10.8 10.8 0 0 0 .5 3.4 1 1 0 0 1-.2 1l-2.4 2.4Z"/></svg></span><span>Chiama ora</span></span></a>
+          <a class="btn service-btn" href="mailto:favoledda.animazione@gmail.com"><span class="btn-content"><span class="social-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 6.5A2.5 2.5 0 0 1 5.5 4h13A2.5 2.5 0 0 1 21 6.5v11A2.5 2.5 0 0 1 18.5 20h-13A2.5 2.5 0 0 1 3 17.5v-11Zm2 .1 7 5.3 7-5.3v-.1H5v.1Zm14 1.5-7 5.3-7-5.3v9.9h14V8.1Z"/></svg></span><span>Scrivi una mail</span></span></a>
+          <a class="btn service-btn" href="https://instagram.com/favoledda.animazione" target="_blank" rel="noopener"><span class="btn-content"><span class="social-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7Zm5 3.2A4.8 4.8 0 1 1 7.2 12 4.8 4.8 0 0 1 12 7.2Zm0 2A2.8 2.8 0 1 0 14.8 12 2.8 2.8 0 0 0 12 9.2Zm5.2-3.2a1.2 1.2 0 1 1-1.2 1.2 1.2 1.2 0 0 1 1.2-1.2Z"/></svg></span><span>Apri Instagram</span></span></a>
+          <a class="btn service-btn" href="https://www.facebook.com/" target="_blank" rel="noopener"><span class="btn-content"><span class="social-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14 8h2V5h-2a3 3 0 0 0-3 3v2H8v3h3v8h3v-8h2.3l.4-3H14V8Z"/></svg></span><span>Apri Facebook</span></span></a>
+          <a class="btn service-btn" href="https://www.tiktok.com/" target="_blank" rel="noopener"><span class="btn-content"><span class="social-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14.5 2h2.3a4.7 4.7 0 0 0 4.7 4.7v2.4a7.1 7.1 0 0 1-4.7-1.6v7.4a5.7 5.7 0 1 1-5.7-5.7c.3 0 .6 0 .9.1v2.4a3.3 3.3 0 1 0 2.4 3.2V2Z"/></svg></span><span>Apri TikTok</span></span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap"><strong>FAVOLEDDA</strong> · Kids Party Animation · Divertimento garantito per i tuoi bambini.</div>
+  </footer>
+</body>
+</html>
